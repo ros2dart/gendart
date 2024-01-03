@@ -984,7 +984,7 @@ def write_pubspec(s, package, search_path, context, indir):
     s.newline()
     s.write('environment:')
     with Indent(s):
-        s.write('sdk: ">=2.12.0 <3.0.0"')
+        s.write('sdk: ">=2.12.0 <4.0.0"')
     s.newline()
     s.write('dependencies:')
     with Indent(s):
