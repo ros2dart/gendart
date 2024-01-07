@@ -33,7 +33,7 @@ def usage(progname):
 def genmain(argv, progname):
     parser = OptionParser("%s file"%(progname))
     parser.add_option('-p', dest='package')
-    parser.add_option('-o', dest='outdir')
+    parser.add_option('-o', dest='outdir', default='/catkin_ws/ros2dart')
     parser.add_option('-I', dest='includepath', action='append')
     options, args = parser.parse_args(argv)
     try:
@@ -51,9 +51,11 @@ def genmain(argv, progname):
         search_path = genmsg.command_line.includepath_to_dict(options.includepath)
         filename = args[1]
         if filename.endswith('.msg'):
-            retcode = generate_msg(options.package, args[1:], options.outdir, search_path)
+            retcode = generate_msg(options.package, args[1:], "/catkin_ws/ros/", search_path)
+            # retcode = generate_msg(options.package, args[1:], options.outdir, search_path)
         else:
-            retcode = generate_srv(options.package, args[1:], options.outdir, search_path)
+            retcode = generate_srv(options.package, args[1:], "/catkin_ws/ros/", search_path)
+            # retcode = generate_srv(options.package, args[1:], options.outdir, search_path)
     except genmsg.InvalidMsgSpec as e:
         print("ERROR: ", e, file=sys.stderr)
         retcode = 1
